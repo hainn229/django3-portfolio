@@ -1,39 +1,34 @@
-{% extends 'portfolio/base.html' %} {% block content %} {% load static %}
-<div class="text-center">
-  <img
-    src="{% static 'portfolio/teacher_man.png' %}"
-    alt="banner"
-    width="100%"
-    height="auto"
-  />
-  <h1>🤣 Peter St. 😂</h1>
-  <h2>Welcome to Portfolio !</h2>
-</div>
-<h2>Portfolio</h2>
-<hr />
-<div class="row row-cols-1 row-cols-md-3 g-4">
-  {% for project in projects %}
-  <div class="col">
-    <div class="card h-100">
-      <img
-        src="{{ project.image.url}}"
-        class="card-img-top"
-        alt="{{ project.title }}"
-        height="300px"
-      />
+{% extends "portfolio/base.html" %} {% load static %} {% block content %}
 
-      <div class="card-body">
-        <h5 class="card-title">{{ project.title }}</h5>
-        <p class="card-text">
-          {{ project.description|striptags|truncatechars:100 }}
-        </p>
-        {% if project.url %}
-        <a href="{{ project.url}}" class="card-link">Go...</a>
-        {% else %}
-        <br />
-        {%endif %}
-      </div>
-    </div>
+<div class="row justify-content-center my-3">
+  <div class="col-5">
+    <img src="{% static 'portfolio/logo.png' %}" class="img-fluid" />
+  </div>
+</div>
+
+<div class="row justify-content-center mb-3">
+  <div class="col-md-9 text-center">
+    <h1 id="hometext" class="font-weight-bold">Peter St</h1>
+    <h2 id="hometext" class="font-weight-bold">😊 I'm a Developer 😊</h2>
+  </div>
+</div>
+
+<h2 class="mt-5">Portfolio</h2>
+<hr />
+<div class="row">
+  {% for project in projects %}
+  <div class="col-lg-4 col-md-6">
+    {% if project.url %}
+    <a href="{{ project.url }}">
+      <img src="{{ project.image.url }}" class="img-fluid mb-2" />
+    </a>
+    <h3>{{ project.title|truncatechars:20 }}</h3>
+    <p>{{ project.description|truncatechars:50 }}</p>
+    {% else %}
+    <img src="{{ project.image.url }}" class="img-fluid mb-2" />
+    <h3>{{ project.title|truncatechars:20 }}</h3>
+    <p>{{ project.description|truncatechars:50 }}</p>
+    {% endif %}
   </div>
   {% endfor %}
 </div>
